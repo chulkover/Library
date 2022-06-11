@@ -1,0 +1,103 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="База данных библиотеки" Height="450" Width="800" MinWidth="800" MinHeight="450" Closed="Window_Closed" Icon="/book_open_book_read_icon_186989.png">
+    
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="Данные">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="MyDataGrid" Margin="0,122,0,0" AutoGenerateColumns="false" CellEditEnding="MyDataGrid_CellEditEnding">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=_id}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=_client._surname}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=_client._name}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Path=_client._patronymic}"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Path=_book._name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Автор" Binding="{Binding Path=_book._author}" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="ColumnTimeStart" Header="Время получения" Binding="{Binding Path=_timeOfReceipt}" />
+                            <DataGridTextColumn x:Name="ColumnTimeFinish" Header="Время возвращения" Binding="{Binding Path=_timeOfReturn}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="LookForButton" Content="Поиск" Margin="0,10,165,0" FontSize="14" Click="LookForButton_Click" HorizontalAlignment="Right" Width="132" Height="25" VerticalAlignment="Top"/>
+                    <TextBox x:Name="LookForText" TextAlignment="Center" Margin="0,10,16,0" Text="Найти" TextWrapping="Wrap" FontSize="14" HorizontalAlignment="Right" Width="132" Height="25" VerticalAlignment="Top"/>
+                    <Button x:Name="RemoveRowButton" Content="Удалить" Margin="0,47,165,0" VerticalAlignment="Top" Height="25" FontSize="14" Click="RemoveRowButton_Click" HorizontalAlignment="Right" Width="132"/>
+                    <TextBox x:Name="DeleteOrder" TextAlignment="Center" Margin="0,47,16,0" Text="Удалить по ID" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" FontSize="14" HorizontalAlignment="Right" Width="132"/>
+                    <Button x:Name="DeleteAllBaseData" Content="Удалить файл" Margin="10,47,0,0" FontSize="14" Height="25" VerticalAlignment="Top" Click="DeleteAllBaseData_Click" HorizontalAlignment="Left" Width="132"/>
+                    <Button x:Name="SaveBDButton" Content="Сохранить в файл" Margin="10,10,0,0" FontSize="14" Height="25" VerticalAlignment="Top" Click="SaveBDButton_Click" HorizontalAlignment="Left" Width="132"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem  Header="Взять книгу" Selector.Selected="TabItem_Selected">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="101.52"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="ComboBooks" Text="Выбор книги" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="240" RenderTransformOrigin="0.508,0.482" Height="30" FontSize="16" IsReadOnly="True" IsEditable="True" SelectionChanged="ComboBooks_SelectionChanged" Grid.Column="1"/>
+                    <Label Content="Книги" HorizontalAlignment="Center" Height="29" Margin="0,20,0,0" VerticalAlignment="Top" Width="58" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="1" />
+                    <TextBox x:Name="TextBoxName" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="15,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Height="30" FontSize="16" Grid.Row="1"/>
+                    <Label x:Name="LabelName" Content="Имя" HorizontalAlignment="Left" Height="36" Margin="111,20,0,0" VerticalAlignment="Top" Width="43" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Row="1"/>
+                    <TextBox x:Name="TextBoxSurname"  AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="12,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="16" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="240" />
+                    <Label x:Name="LabelSurname" Content="Фамилия" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="1" Grid.Row="1" Margin="90,20,0,0"/>
+                    <TextBox x:Name="TextBoxPatronymic" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="10,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="16" HorizontalAlignment="Left" Width="240" Grid.Column="2" Grid.Row="1"/>
+                    <Label x:Name="LabelPatronymic" Content="Отчество" HorizontalAlignment="Left" Height="36" Margin="94,20,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="2" Grid.Row="1"/>
+                    <TextBox x:Name="TextBoxNameBook" Visibility="Hidden" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="12,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Width="240"/>
+                    <Label x:Name="LabelNameBook" Visibility="Hidden" Content="Название книги" HorizontalAlignment="Left" Height="29" Margin="66,28,0,0" VerticalAlignment="Top" Width="132" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="1"/>
+                    <TextBox x:Name="TextBoxAuthor" Visibility="Hidden" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="13,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="16" IsReadOnly="True" HorizontalAlignment="Left" Width="240" Grid.Column="2"/>
+                    <Label x:Name="LabelAuthor" Visibility="Hidden" Content="Автор книги" HorizontalAlignment="Left" Height="29" Margin="82,28,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="2"/>
+                    <Label x:Name="LabelDateStart" Content="Дата получения книги" HorizontalAlignment="Left" Height="29" Margin="52,21,0,0" VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Row="2"/>
+                    <DatePicker Name="DateStart" HorizontalAlignment="Left" Margin="20,55,0,0" VerticalAlignment="Top" Width="240" FontSize="16" Height="29" Grid.Row="2"/>
+                    <Label x:Name="LabelDateFinish" Content="Дата возврашения книги" HorizontalAlignment="Left" Height="29" Margin="32,21,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="1" Grid.Row="2"/>
+                    <DatePicker x:Name="DateFinish" Margin="12,55,0,0" FontSize="16" Height="29" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="240"/>
+                    <Button x:Name="ButtonCreateDebtor" Content="Обработать заявку" HorizontalAlignment="Left" Margin="13,55,0,0" VerticalAlignment="Top" Height="29" Width="240" FontSize="16" Click="ButtonCreateDebtor_Click" Grid.Column="2" Grid.Row="2"/>
+                    <Label x:Name="LabelMessage" Content="" HorizontalAlignment="Left" Height="29" Margin="20,33,0,0" VerticalAlignment="Top" Width="759" RenderTransformOrigin="0.5,0.554" FontSize="16" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Сведения" Selector.Selected="TabItem_Selected_1">
+                <Grid>
+                    <DataGrid x:Name="DataGridWithInfo" AutoGenerateColumns="false" Margin="0,172,0,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=_client._key}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=_client._name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=_client._surname}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Path=_client._patronymic}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Количество книг" Binding="{Binding Path=_count}" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid x:Name="DataBooks" Visibility="Hidden" AutoGenerateColumns="false" Margin="0,172,0,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=_number}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Path=_name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Автор" Binding="{Binding Path=_author}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Количество книг" Binding="{Binding Path=_count}" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Сведения о должниках" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Height="45" Width="221" FontWeight="Bold" Click="Button_Click"/>
+                    <Button Content="Книги в хранилище" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" FontSize="16" Height="45" Width="221" FontWeight="Bold" Click="Button_Click_1"/>
+                    <Button Content="Добавить книгу" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" FontSize="16" Height="45" Width="221" FontWeight="Bold" Click="Button_Click_2"/>
+                    <ComboBox Name="BooksForAdd" Text="Выбор книги" Margin="0,10,46,0" VerticalAlignment="Top" FontSize="20" IsReadOnly="True" IsEditable="True" SelectionChanged="BooksForAdd_SelectionChanged" HorizontalAlignment="Right" Width="416"/>
+                    <TextBox x:Name="TextBoxNameAdd"   AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,82,265,0"  TextWrapping="Wrap" VerticalAlignment="Top"  Height="30" FontSize="20" TextChanged="TextBoxNameAdd_TextChanged" HorizontalAlignment="Right" Width="197"/>
+                    <TextBox x:Name="TextBoxAuthorAdd" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,81,46,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="20" TextChanged="TextBoxAuthorAdd_TextChanged" HorizontalAlignment="Right" Width="198"/>
+                    <Label Name="LabelNameAdd" Content="Название книги" Margin="0,43,284,0" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Width="158"/>
+                    <Label Name="LabelAuthorAdd" Content="Автор книги" Margin="0,43,82,0" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Width="124"/>
+                    <Button x:Name="ButtonConfirmAdd" Content="Подтвердить" HorizontalAlignment="Right" Margin="0,120,46,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="35" Width="197" Click="ButtonConfirmAdd_Click"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

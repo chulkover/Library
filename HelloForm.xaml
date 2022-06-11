@@ -1,0 +1,17 @@
+﻿<Window x:Class="Library.HelloForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="Приветственное сообщение" Height="300" Width="800">
+    <Grid x:Name="GridHello" Background="white" Margin="0,0,0,-6">
+        <Label Content="Курсовая работа по ООП" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" FontFamily="Times New Roman"/>
+        <Label Content="Тема &quot;Библиотека&quot;" HorizontalAlignment="Center" Margin="0,72,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" FontFamily="Times New Roman"/>
+        <Label Content="Выполнил: студент  группы 19ВП2" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" FontFamily="Times New Roman"/>
+        <Label Content="Чулков Данила Александрович" HorizontalAlignment="Center" Margin="0,147,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" FontFamily="Times New Roman"/>
+        <Label x:Name="LabelTimer" Content="Закрытия окна через 10..." HorizontalAlignment="Center" Margin="0,206,0,0" VerticalAlignment="Top" FontSize="14" BorderBrush="Red" BorderThickness="1"/>
+
+    </Grid>
+</Window>

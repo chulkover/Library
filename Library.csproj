@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="book_open_book_read_icon_186989.png" />
+    <None Remove="Library.ico" />
+    <None Remove="Library.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="book_open_book_read_icon_186989.png" />
+    <Resource Include="Library.ico" />
+    <Resource Include="Library.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="HelloForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="HelloForm.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
